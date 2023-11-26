@@ -654,8 +654,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b90e616a8277f476f8580c3cdc88586c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planeManager: {fileID: 1659859601}
-  objectToPlace: {fileID: 5906782733570075224, guid: d39667af00cc845dca5db61fc42a83e3,
+  raycastManager: {fileID: 1659859603}
+  objectToPlacePrefab: {fileID: 5906782733570075224, guid: d39667af00cc845dca5db61fc42a83e3,
     type: 3}
 --- !u!114 &1659859603
 MonoBehaviour:

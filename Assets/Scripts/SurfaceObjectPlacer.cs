@@ -6,37 +6,39 @@ using UnityEngine.XR.ARSubsystems;
 
 public class SurfaceObjectPlacer : MonoBehaviour
 {
-    public ARPlaneManager planeManager;
-    public GameObject objectToPlace;
-    private GameObject lastInstantiatedObject;
-    private ARRaycastManager raycastManager;
+    public ARRaycastManager raycastManager;
+    public GameObject objectToPlacePrefab;
+    private GameObject placedObject;
     private List<ARRaycastHit> raycastHits = new List<ARRaycastHit>();
-
-    void Awake()
-    {
-        raycastManager = GetComponent<ARRaycastManager>();
-    }
 
     void Update()
     {
+        // Sprawdź, czy użytkownik dotknął ekranu
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
+
+            // Wykonaj raycast, gdy użytkownik dotknie ekranu
             if (touch.phase == TouchPhase.Began)
             {
                 if (raycastManager.Raycast(touch.position, raycastHits, TrackableType.PlaneWithinPolygon))
                 {
                     Pose hitPose = raycastHits[0].pose;
 
-                    if (lastInstantiatedObject != null)
+                    // Jeśli jeszcze nie umieszczono obiektu, umieść go. W przeciwnym razie przesuń istniejący obiekt.
+                    if (placedObject == null)
                     {
-                        Destroy(lastInstantiatedObject);
+                        placedObject = Instantiate(objectToPlacePrefab, hitPose.position, hitPose.rotation);
                     }
-
-                    lastInstantiatedObject = Instantiate(objectToPlace, hitPose.position, hitPose.rotation);
-                    lastInstantiatedObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Dostosuj skalę według potrzeb
+                    else
+                    {
+                        
+                        //placedObject.transform.position = hitPose.position;
+                        //placedObject.transform.rotation = hitPose.rotation;
+                    }
                 }
             }
         }
     }
 }
+
