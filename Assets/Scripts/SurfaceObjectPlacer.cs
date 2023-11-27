@@ -7,8 +7,10 @@ using UnityEngine.XR.ARSubsystems;
 public class SurfaceObjectPlacer : MonoBehaviour
 {
     public ARRaycastManager raycastManager;
-    public GameObject objectToPlacePrefab;
-    private GameObject placedObject;
+    public GameObject carPrefab;
+    public GameObject trackPrefab;
+    private GameObject placedCar;
+    private GameObject placedTrack;
     private List<ARRaycastHit> raycastHits = new List<ARRaycastHit>();
 
     void Update()
@@ -23,13 +25,18 @@ public class SurfaceObjectPlacer : MonoBehaviour
                 {
                     Pose hitPose = raycastHits[0].pose;
 
-                    if (placedObject == null)
+                    Vector3 carPosition = new Vector3(hitPose.position.x, hitPose.position.y + 0.02f, hitPose.position.z); // dostosuj wysokość Y
+                    if (placedCar == null)
                     {
-                        placedObject = Instantiate(objectToPlacePrefab, hitPose.position, hitPose.rotation);
+                        placedCar = Instantiate(carPrefab, carPosition, hitPose.rotation);
+                    }
+
+                    if (placedTrack == null)
+                    {
+                        placedTrack = Instantiate(trackPrefab, hitPose.position, hitPose.rotation);
                     }
                 }
             }
         }
     }
 }
-

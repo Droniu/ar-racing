@@ -655,7 +655,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastManager: {fileID: 1659859603}
-  objectToPlacePrefab: {fileID: 5906782733570075224, guid: d39667af00cc845dca5db61fc42a83e3,
+  carPrefab: {fileID: 7148629350404727398, guid: 5ed9c7ebbbc3c41388114138ea11af14,
+    type: 3}
+  trackPrefab: {fileID: 8514689090414302152, guid: 51579ef75b28b4bb68514c7cadea76de,
     type: 3}
 --- !u!114 &1659859603
 MonoBehaviour:
